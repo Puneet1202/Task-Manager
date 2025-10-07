@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link , useNavigate } from 'react-router-dom';
 import Navbar from '../components/Navbar';
 import axios from 'axios'; // Axios import karein
 
@@ -7,6 +7,7 @@ import axios from 'axios'; // Axios import karein
 function LoginPage() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const navigate = useNavigate(); // Navigation ke liye
 
   const handleSubmit =  async(e) => {
     e.preventDefault();
@@ -23,6 +24,8 @@ function LoginPage() {
       const {token} = response.data;
       localStorage.setItem('token', token);
        console.log("Token saved to localStorage:", token); // Check karne ke liye
+        navigate('/dashboard'); // Login ke baad dashboard par le jaayein
+        
   
 
     }catch (error) {

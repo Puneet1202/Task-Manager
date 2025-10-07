@@ -1,0 +1,55 @@
+.notes-container {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    background-color: #f7f7f7;
+    font-family: sans-serif;
+}
+
+.notes-grid {
+    flex-grow: 1;
+    padding: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    align-content: flex-start;
+    gap: 20px;
+    overflow-y: auto;
+}
+
+.note {
+    width: 200px;
+    height: 200px;
+    padding: 15px;
+    background-color: #ffc;
+    box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.2);
+    font-size: 18px;
+    word-wrap: break-word; /* Lambe text ko agli line mein bhejega */
+}
+
+.note-form-container {
+    padding: 15px;
+    background-color: #fff;
+    border-top: 1px solid #ddd;
+}
+
+.note-form-container form {
+    display: flex;
+    gap: 10px;
+}
+
+.note-input {
+    flex-grow: 1;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+.add-note-button {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}

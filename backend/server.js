@@ -4,6 +4,11 @@ const dotenv = require('dotenv');
 const connectDB = require('./config/db');
 const User = require('./models/user.model');
 const router = require('./routers/Auth.router');
+const DashboardRouter = require('./routers/Dashboard.router');
+const authMiddleware = require('./middlewares/auth.middleware');
+const taskRoutes = require('./routers/task.router');
+
+// Load environment variables from .env file
 dotenv.config();
 const app = express();
 connectDB();
@@ -19,7 +24,11 @@ app.get('/', (req, res) => {
     res.send('Backend ka office khul gaya hai!');
 });
 
-app.use('/api', router);      
+app.use('/api', router);  
+    
+app.use('/api/dashboard', DashboardRouter);
+
+app.use('/api', taskRoutes);
 
 
 
