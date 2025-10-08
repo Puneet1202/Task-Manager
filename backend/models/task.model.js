@@ -23,11 +23,12 @@ const taskSchema = new Schema({
     },
     
     // Yeh task ki priority hai
-    priority: {
-        type: String,
-        enum: ['low', 'medium', 'high'],
-        default: 'medium'
-    },
+   priority: {
+    type: String,
+    // Capital aur small dono options daal dein
+    enum: ['Low', 'Medium', 'High', 'low', 'medium', 'high'],
+    default: 'medium'
+},
     
     // YEH SABSE IMPORTANT PART HAI
     // Isse pata chalega ki yeh task kis user ne banaya hai

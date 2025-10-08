@@ -5,8 +5,12 @@ import TaskCard from './TaskCard';
 import TaskModal from './TaskModal';
 import StatsCard from './StatsCard';
 import FilterBar from './FilterBar';
+import SimpleDropdown from '../SimpleDropdown';
+import { useNavigate } from 'react-router-dom';
+
 
 const TaskManagerDashboard = () => {
+   const navigate = useNavigate();
   const [tasks, setTasks] = useState([]);
   const [showModal, setShowModal] = useState(false);
   const [editingNote, setEditingNote] = useState(null);
@@ -29,6 +33,11 @@ const TaskManagerDashboard = () => {
     };
     fetchTasks();
   }, []);
+
+   const handleLogout = () => {
+    localStorage.removeItem('token'); // Token ko delete karo
+    navigate('/'); // User ko home page par bhej do
+  };
 
   const handleDelete = async (taskId) => {
     if (window.confirm("Are you sure you want to delete this task?")) {
@@ -111,9 +120,9 @@ const TaskManagerDashboard = () => {
           <h1 className="text-3xl font-bold text-gray-900">Task Manager</h1>
           <p className="mt-2 text-slate-600">Yahan aapke saare tasks hain!</p>
         </div>
-        <button onClick={openNewTaskModal} className="bg-blue-600 text-white px-4 py-2 rounded-lg font-semibold hover:bg-blue-700 flex items-center gap-2">
-          <Plus size={20} /> New Task
-        </button>
+        
+          <SimpleDropdown onLogout={handleLogout} />
+
       </div>
       <div className="mt-8 grid grid-cols-2 lg:grid-cols-4 gap-6">
         <StatsCard title="Total Tasks" count={stats.total} icon={Circle} color="text-gray-600" />
@@ -131,7 +140,15 @@ const TaskManagerDashboard = () => {
           ))
         ) : ( <div className="col-span-full text-center py-12"><h3 className="text-lg font-semibold text-gray-600">No tasks found.</h3></div> )}
       </div>
+      
       <TaskModal show={showModal} editingNote={editingNote} newNote={newTask} setNewNote={setNewTask} onSave={handleSaveTask} onClose={() => { setShowModal(false); setEditingNote(null); }} />
+       <button 
+        onClick={openNewTaskModal}
+        className="fixed bottom-8 right-8 bg-blue-600 text-white w-14 h-14 rounded-full flex items-center justify-center shadow-lg hover:bg-blue-700 transition-transform hover:scale-110"
+        title="Create New Task"
+      >
+        <Plus size={28} />
+      </button>
     </div>
   );
 };

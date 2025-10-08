@@ -1,10 +1,10 @@
 const express = require('express');
 const router = express.Router();
 const User = require('../models/user.model');
-const { verifyToken } = require('../middlewares/auth.middleware.js'); // Naye path se import karein
+const authMiddleware = require('../middlewares/auth.middleware'); 
 
 // Protected route to get user dashboard data
-router.get('/dashboard', verifyToken, async (req, res) => {
+router.get('/dashboard',  authMiddleware, async (req, res) => {
     try {
         const user = await User.findById(req.user.id).select('-password');
         if (!user) {

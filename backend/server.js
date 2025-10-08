@@ -7,6 +7,7 @@ const router = require('./routers/Auth.router');
 const DashboardRouter = require('./routers/Dashboard.router');
 const authMiddleware = require('./middlewares/auth.middleware');
 const taskRoutes = require('./routers/task.router');
+const aiRoutes = require('./routers/aiRoutes');
 
 // Load environment variables from .env file
 dotenv.config();
@@ -29,6 +30,8 @@ app.use('/api', router);
 app.use('/api/dashboard', DashboardRouter);
 
 app.use('/api', taskRoutes);
+app.use('/api/ai', aiRoutes);
+
 
 
 
